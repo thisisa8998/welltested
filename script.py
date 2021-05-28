@@ -14,7 +14,7 @@ from pyppeteer import launch
 import requests
 
 
-pausetime = 5
+pausetime = 1
 isRunning = True
 rotatingproxy_url = 'http://falcon.proxyrotator.com:51337/'
 rotatingproxy_apikey = 'h6nteVyuk3NUXZKLgQmwMGJvrRxsHPjD'
@@ -25,7 +25,7 @@ async def puppet(url, proxy, useragent):
                                  '--user-agent=' + useragent])
     try:
         page = await browser.newPage()
-        await page.goto(url, timeout=3000)
+        await page.goto(url, timeout=2000)
         dimensions = await page.evaluate('''() => {
            return {
                width: document.documentElement.clientWidth,
@@ -52,13 +52,13 @@ def run():
                 for url in urls:
                     url = base64.urlsafe_b64decode(url)
                     url = url.decode("utf-8")
-                    for i in range(4):
+                    for i in range(2):
                         asyncio.get_event_loop().run_until_complete(puppet(url, proxy, get_user_agent()))
                         rnd = random.randrange(int(pausetime)+1, (int(pausetime)*2)+2)
                         time.sleep(rnd)
-            rnd = random.randrange(int(pausetime)+1, (int(pausetime)*2)+2)
+            rnd = random.randrange(int(pausetime)+1, (int(pausetime)*2)+1)
             time.sleep(rnd)
-        time.sleep(5)
+        time.sleep(2)
 
 
 def get_user_agent():
@@ -104,6 +104,6 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
 
 handler_object = MyHttpRequestHandler
 PORT = os.environ['PORT']
-my_server = socketserver.TCPServer(("", int(PORT)), handler_object)
+my_server = socketserver.TCPServer(("", PORT), handler_object)
 threading.Thread(target=my_server.serve_forever).start()
 run()
