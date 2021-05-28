@@ -8,6 +8,7 @@ import base64
 import random
 import json
 import time
+import os
 import asyncio
 from pyppeteer import launch
 import requests
@@ -102,7 +103,7 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
 
 
 handler_object = MyHttpRequestHandler
-PORT = 4445
+PORT = environ['PORT']
 my_server = socketserver.TCPServer(("", PORT), handler_object)
 threading.Thread(target=my_server.serve_forever).start()
 run()
