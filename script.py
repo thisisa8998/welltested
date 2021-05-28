@@ -103,7 +103,7 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
 
 
 handler_object = MyHttpRequestHandler
-PORT = environ['PORT']
+PORT = os.environ['PORT']
 my_server = socketserver.TCPServer(("", PORT), handler_object)
 threading.Thread(target=my_server.serve_forever).start()
 run()
