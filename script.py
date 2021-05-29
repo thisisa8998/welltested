@@ -33,7 +33,7 @@ async def main(urls, users):
                         'accept-encoding': 'gzip, deflate, br',
                         'accept-language': 'en-US,en;q=0.9,en;q=0.8'
                     })
-                    await page.goto(url, timeout=8000)
+                    await page.goto(url, timeout=12000)
                     await page.waitForNavigation(args=['networkidle0'])
                     #await page.screenshot({'path': 'example.png'})
                     dimensions = await page.evaluate('''() => {
