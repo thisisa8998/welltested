@@ -26,13 +26,14 @@ async def main(urls, users):
                     second = ''.join(random.choices(string.ascii_uppercase + string.digits, k=2))
                     await page.setExtraHTTPHeaders({
                         'Referer': 'http://'+str(first)+'.'+str(second),
+                        'Origin': 'http://'+str(first)+'.'+str(second),
                         'user-agent': ''+str(user),
                         'upgrade-insecure-requests': '1',
                         'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
                         'accept-encoding': 'gzip, deflate, br',
                         'accept-language': 'en-US,en;q=0.9,en;q=0.8'
                     })
-                    await page.goto(url)
+                    await page.goto(url, timeout=8000)
                     await page.waitForNavigation(args=['networkidle0'])
                     #await page.screenshot({'path': 'example.png'})
                     dimensions = await page.evaluate('''() => {
