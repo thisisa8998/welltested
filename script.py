@@ -38,7 +38,7 @@ async def main(urls, users):
                     #await page.waitForNavigation(args=['networkidle0'])
                     await page.screenshot({'path': 'example.png'})
                     dimensions = await page.evaluate('''() => {
-                        return {s
+                        return {
                             width: document.documentElement.clientWidth,
                             height: document.documentElement.clientHeight,
                             deviceScaleFactor: window.devicePixelRatio,
