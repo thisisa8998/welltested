@@ -33,12 +33,12 @@ async def main(urls, users):
                         'accept-encoding': 'gzip, deflate, br',
                         'accept-language': 'en-US,en;q=0.9,en;q=0.8'
                     })
-                    await page.goto(url, timeout=30000)
-                    await page.waitFor(7000)
+                    await page.goto(url, timeout=20000)
+                    await page.waitFor(6000)
                     #await page.waitForNavigation(args=['networkidle0'])
                     #await page.screenshot({'path': 'example.png'})
                     dimensions = await page.evaluate('''() => {
-                        return {
+                        return {s
                             width: document.documentElement.clientWidth,
                             height: document.documentElement.clientHeight,
                             deviceScaleFactor: window.devicePixelRatio,
@@ -62,6 +62,6 @@ with open('urls.txt') as f:
         print(users)
         while True:
             try:
-                asyncio.get_event_loop().run_until_complete(main(urls, users))
+                asyncio.new_event_loop().run_until_complete(main(urls, users))
             except Exception as e:
                 print(e)
