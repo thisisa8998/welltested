@@ -36,7 +36,7 @@ async def main(urls, users):
                     await page.goto(url, timeout=20000)
                     await page.waitFor(6000)
                     #await page.waitForNavigation(args=['networkidle0'])
-                    #await page.screenshot({'path': 'example.png'})
+                    await page.screenshot({'path': 'example.png'})
                     dimensions = await page.evaluate('''() => {
                         return {s
                             width: document.documentElement.clientWidth,
@@ -60,8 +60,10 @@ with open('urls.txt') as f:
     with open('users.txt') as k:
         users = k.read().splitlines()
         print(users)
+        loop = asyncio.get_event_loop()
         while True:
             try:
-                asyncio.new_event_loop().run_until_complete(main(urls, users))
+                loop.run_until_complete(main(urls, users))
             except Exception as e:
                 print(e)
+                loop = asyncio.new_event_loop()
